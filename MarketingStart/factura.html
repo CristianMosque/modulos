@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Factura - Start IoT</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+        .container {
+            width: 90%;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .header {
+            text-align: center;
+        }
+        .header img {
+            width: 150px;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+        .header p {
+            margin: 5px 0;
+        }
+        .transaction-details, .footer {
+            margin-top: 20px;
+        }
+        .transaction-details .column {
+            width: 45%;
+            float: left;
+            margin-right: 5%;
+        }
+        .transaction-details .column:last-child {
+            margin-right: 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        .totals {
+            text-align: right;
+            font-weight: bold;
+        }
+        .footer {
+            clear: both;
+            text-align: center;
+            font-size: 14px;
+            margin-top: 40px;
+            border-top: 1px solid #ddd;
+            padding-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Encabezado -->
+        <div class="header">
+            <img src="logo.png" alt="Logo Start IoT">
+            <h1>Factura</h1>
+            <p>Start IoT System</p>
+            <p>NIT: <<[Nit]>></p>
+            <p>Dirección: Av. Principal, Bogotá, Colombia</p>
+            <p>Teléfono: +57 300 123 4567</p>
+        </div>
+
+        <!-- Detalles de la transacción -->
+        <div class="transaction-details">
+            <div class="column">
+                <h3>Datos del Cliente</h3>
+                <p><strong>ID Cliente:</strong> <<[id_cliente]>></p>
+                <p><strong>Nombre:</strong> [Nombre Cliente]</p>
+                <p><strong>Dirección:</strong> [Dirección Cliente]</p>
+                <p><strong>Teléfono:</strong> [Teléfono Cliente]</p>
+            </div>
+            <div class="column">
+                <h3>Datos del Vendedor</h3>
+                <p><strong>ID Vendedor:</strong> <<[id_empresa]>></p>
+                <p><strong>Nombre:</strong> <<[Vendedor]>></p>
+                <p><strong>Fecha:</strong> <<[fecha]>> <<[Hora]>></p>
+                <p><strong>No. Factura:</strong> <<[Numero_factura]>></p>
+            </div>
+        </div>
+
+        <!-- Tabla de productos y servicios -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Producto/Servicio</th>
+                    <th>Cantidad</th>
+                    <th>Precio Unitario</th>
+                    <th>Descuento</th>
+                    <th>Subtotal</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Productos -->
+                <<Start: [Related Detalles_Facturacions]>>
+                <tr>
+                    <td>Producto: <<[ProductoID]>></td>
+                    <td>1</td>
+                    <td>$<<[Precio]>></td>
+                    <td>$<<[descuento]>></td>
+                    <td>$<<[Sub_total]>></td>
+                </tr>
+                <<End>>
+
+                <!-- Servicios -->
+                <<Start: [Related Detalles_Servicios]>>
+                <tr>
+                    <td>Servicio: <<[Servicio ID]>></td>
+                    <td><<[Cantidad]>></td>
+                    <td>$<<[PrecioUnitario]>></td>
+                    <td>$0</td>
+                    <td>$<<[PrecioTotal]>></td>
+                </tr>
+                <<End>>
+            </tbody>
+        </table>
+
+        <!-- Tabla de envío y totales -->
+        <table>
+            <tr>
+                <th>Envío</th>
+                <td>$<<[Envio_Costo]>></td>
+            </tr>
+            <tr class="totals">
+                <th>IVA</th>
+                <td>$<<[IVA]>></td>
+            </tr>
+            <tr class="totals">
+                <th>Total</th>
+                <td>$<<[Precio_Total]>></td>
+            </tr>
+        </table>
+
+        <!-- Pie de página -->
+        <div class="footer">
+            <p>Gracias por su compra.</p>
+            <p>Start IoT System - Av. Principal, Bogotá, Colombia</p>
+            <p>Teléfono: +57 300 123 4567 | Email: contacto@startiot.com</p>
+        </div>
+    </div>
+</body>
+</html>
