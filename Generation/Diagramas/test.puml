@@ -1,0 +1,40 @@
+@startuml
+
+title Proceso de Venta de GPS
+
+start
+
+:Cliente solicita cotización del GPS;
+
+if (Cliente existente?) then (Sí)
+    :Consultar historial del cliente;
+    :Ofrecer descuentos o promociones;
+else (No)
+    :Registrar datos del cliente;
+endif
+
+:Generar cotización personalizada;
+:Enviar cotización al cliente;
+
+if (Cliente acepta cotización?) then (Sí)
+    :Confirmar método de pago;
+    if (Pago realizado?) then (Sí)
+        :Emitir factura electrónica;
+        :Preparar GPS para envío;
+        :Registrar número de guía para seguimiento;
+        :Notificar al cliente sobre el envío;
+    else (No)
+        :Notificar cliente sobre pago pendiente;
+        stop
+    endif
+else (No)
+    :Solicitar retroalimentación sobre la cotización;
+    stop
+endif
+
+:Actualizar base de datos con venta realizada;
+:Finalizar proceso;
+
+stop
+
+@enduml
